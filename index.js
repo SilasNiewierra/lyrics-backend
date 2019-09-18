@@ -33,7 +33,7 @@ app.get("/tracks/:artist_name/:page", (req, res, next) => {
     url = BASE_URL+'/track.search?q_artist='+req.params.artist_name+'&page='+req.params.page+'&s_track_rating=desc&f_has_lyrics=1'+API_KEY
     axios.get(url)
     .then(response => {
-        console.log(response)
+        console.log(response.data.message)
         var result_tracks = []
 
         for (var track of response.data.message.body.track_list) {
