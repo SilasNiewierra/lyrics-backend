@@ -23,11 +23,17 @@ app.use(function(req, res, next) {
     next();
 });
 
+// Welcome text
+app.get("/", (req, res, next) => {
+  res.send("This is not the website you're looking for.")
+});
+
 // Get tracks for artist by name and page number
 app.get("/tracks/:artist_name/:page", (req, res, next) => {
     url = BASE_URL+'/track.search?q_artist='+req.params.artist_name+'&page='+req.params.page+'&s_track_rating=desc&f_has_lyrics=1'+API_KEY
     axios.get(url)
     .then(response => {
+        console.log(response)
         var result_tracks = []
 
         for (var track of response.data.message.body.track_list) {
